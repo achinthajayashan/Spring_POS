@@ -104,7 +104,7 @@ $("#selectItemCode").change(function () {
     if (res.length > 0) {
         $("#txtItemDescription").val(res[0].description);
         $("#txtItemPrice").val(res[0].unitPrice);
-        $("#txtQTYOnHand").val(res[0].qty);
+        $("#txtQTYOnHand").val(res[0].qtyOnHand);
     }
 });
 
@@ -126,7 +126,7 @@ $("#btnSubmitOrder").click(function () {
     let orderDate = $("#txtDate").val();
     let orderD = getItemDetails();
 
-    let ob = {
+    let order = {
         oid: orderID,
         date: orderDate,
         cusID: customerID,
@@ -136,12 +136,12 @@ $("#btnSubmitOrder").click(function () {
     //send request
     $.ajax({
         url: BASE_URL + "purchase_order",
-        method: "post",
+        method: "POST",
         dataType: "json",
-        headers:{
-            Auth:"user=admin,pass=admin"
-        },
-        data: JSON.stringify(ob),
+        // headers:{
+        //     Auth:"user=admin,pass=admin"
+        // },
+        data: JSON.stringify(order),
         contentType: "application/json",
         success: function (resp) {
             alert(resp.message);
