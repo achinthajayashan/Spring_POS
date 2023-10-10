@@ -110,13 +110,13 @@ $("#selectItemCode").change(function () {
 
 
 $("#btnAddToTable").click(function () {
-    let code = $("#selectItemCode").val();
+    let itemCode = $("#selectItemCode").val();
     let description = $("#txtItemDescription").val();
-    let itemPrice = $("#txtItemPrice").val();
-    let buyQty = $("#txtQty").val();
+    let unitPrice = $("#txtItemPrice").val();
+    let qty = $("#txtQty").val();
     let avQty = $("#txtQTYOnHand").val();
-    let total = parseFloat(itemPrice) * parseFloat(buyQty);
-    $("#orderTable").append(`<tr><td>${code}</td><td>${description}</td><td>${itemPrice}</td><td>${avQty}</td><td>${buyQty}</td><td>${total}</td></tr>`);
+    let total = parseFloat(unitPrice) * parseFloat(qty);
+    $("#orderTable").append(`<tr><td>${itemCode}</td><td>${description}</td><td>${unitPrice}</td><td>${avQty}</td><td>${qty}</td><td>${total}</td></tr>`);
 });
 
 
@@ -138,9 +138,9 @@ $("#btnSubmitOrder").click(function () {
         url: BASE_URL + "purchase_order",
         method: "POST",
         dataType: "json",
-        // headers:{
-        //     Auth:"user=admin,pass=admin"
-        // },
+        headers:{
+            Auth:"user=admin,pass=admin"
+        },
         data: JSON.stringify(order),
         contentType: "application/json",
         success: function (resp) {
@@ -163,7 +163,7 @@ function getItemDetails() {
         let avQty = $("#orderTable").children().eq(i).children(":eq(3)").text();
         let itQty = $("#orderTable").children().eq(i).children(":eq(4)").text();
         let itPrice = $("#orderTable").children().eq(i).children(":eq(2)").text();
-        array.push({code: itCode,avQty:avQty, qty: itQty, price: itPrice});
+        array.push({itemCode: itCode,avQty:avQty, qty: itQty, unitPrice: itPrice});
     }
     return array;
 }
