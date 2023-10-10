@@ -124,7 +124,7 @@ $("#btnSubmitOrder").click(function () {
     let orderID = $("#txtOrderID").val();
     let customerID = $("#orderCustomerID").val();
     let orderDate = $("#txtDate").val();
-    let orderD = getItemDetails();
+    let orderD = getItemDetails(orderID);
 
     let order = {
         oid: orderID,
@@ -155,7 +155,7 @@ $("#btnSubmitOrder").click(function () {
 
 });
 
-function getItemDetails() {
+function getItemDetails(orderID) {
     let rows = $("#orderTable").children().length;
     var array = [];
     for (let i = 0; i < rows; i++) {
@@ -163,7 +163,7 @@ function getItemDetails() {
         let avQty = $("#orderTable").children().eq(i).children(":eq(3)").text();
         let itQty = $("#orderTable").children().eq(i).children(":eq(4)").text();
         let itPrice = $("#orderTable").children().eq(i).children(":eq(2)").text();
-        array.push({itemCode: itCode,avQty:avQty, qty: itQty, unitPrice: itPrice});
+        array.push({oid:orderID , itemCode: itCode,avQty:avQty, qty: itQty, unitPrice: itPrice});
     }
     return array;
 }
