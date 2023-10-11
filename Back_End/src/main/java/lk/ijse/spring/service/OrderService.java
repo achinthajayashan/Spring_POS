@@ -1,5 +1,9 @@
 package lk.ijse.spring.service;
 
-public interface OrderService {
+import lk.ijse.spring.dto.OrdersDTO;
 
+import java.util.List;
+
+public interface OrderService {
+    List<OrdersDTO> getAllOrders();
 }
